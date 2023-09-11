@@ -1,0 +1,21 @@
+﻿@model WebApp.ViewModels.AddPostModel
+<h1>Create Post</h1>
+
+<form method="post" asp-controller="Home" asp-action="CreatePost">
+    <p>
+        <label asp-for="Title">Title</label><br />
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"/>
+    </p>
+    <p>
+        <label asp-for="Description">Description</label><br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description" />
+    </p>
+    <p>
+        <input asp-for="Author"  type="hidden"/>
+    </p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+</form>

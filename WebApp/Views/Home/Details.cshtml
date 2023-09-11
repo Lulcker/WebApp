@@ -1,0 +1,17 @@
+﻿@model WebApp.Models.Post
+<h1>Details Post</h1>
+
+<form asp-controller="Home" asp-action="DetailsPost" asp-route-id="@Model.Id" method="get">
+    <p>
+        <label asp-for="Title">Title</label><br />
+        <input asp-for="Title" readonly/>
+    </p>
+    <p>
+        <label asp-for="Description">Description</label><br />
+        <input asp-for="Description" readonly />
+    </p>
+    <p>
+        <label asp-for="Author">Author</label><br />
+        <input asp-for="Author" readonly />
+    </p>
+</form>
