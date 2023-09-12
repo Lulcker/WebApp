@@ -7,8 +7,10 @@ namespace WebApp.Repositories
     {
         Task AddPostAsync(AddPostModel model);
 
-        Task<IndexViewModel> GetAllPostAsync();
+        Task<IndexViewModel> GetAllPostAsync(int pageCount, int pageNumber, int pageSize = 5);
 
         Task<Post> GetPostAsync(int id);
+
+        Task<int> PostCount();
     }
 }

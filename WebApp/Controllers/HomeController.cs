@@ -16,9 +16,10 @@ namespace WebApp.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-           var posts = await _postRepository.GetAllPostAsync();
+            var count = await _postRepository.PostCount();
+            var posts = await _postRepository.GetAllPostAsync(count, page);
             return View(posts);
         }
 
