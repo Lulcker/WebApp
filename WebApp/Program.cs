@@ -4,7 +4,7 @@ using WebApp.Repositories;
 using WebApp.Services;
 using WebApp.Models;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 
 string? connection = builder.Configuration.GetConnectionString("connect");
 

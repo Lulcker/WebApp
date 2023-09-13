@@ -1,5 +1,6 @@
 ﻿@model WebApp.ViewModels.IndexViewModel
-<h1>Index</h1>
+
+<h1 class="test">Index</h1>
 @if (!User.Identity.IsAuthenticated)
 {
     <a asp-controller="Account" asp-action="Login">Войти</a>
@@ -35,10 +36,10 @@
 <p>
     @if (Model.PagingInfo.HasPreviousPage)
     {
-        <a asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber - 1)" class="glyphicon glyphicon-chevron-left">Назад</a>
+        <a asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber - 1)" >Назад</a>
     }
     @if (Model.PagingInfo.HasNextPage)
     {
-        <a asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber + 1)" class="glyphicon glyphicon-chevron-right">Вперёд</a>
+        <a asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber + 1)" >Вперёд</a>
     }
 </p>
