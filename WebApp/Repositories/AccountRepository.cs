@@ -54,5 +54,11 @@ namespace WebApp.Repositories
         {
             await _signInManager.SignOutAsync();
         }
+
+        public async Task DeleteUserAsync(IdentityUser user)
+        {
+            if (!user.EmailConfirmed)
+                await _userManager.DeleteAsync(user);
+        }
     }
 }

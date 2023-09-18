@@ -18,5 +18,7 @@ namespace WebApp.Repositories
         Task SignInAsync(IdentityUser user);
 
         Task SignOutAsync();
+
+        Task DeleteUserAsync(IdentityUser user);
     }
 }

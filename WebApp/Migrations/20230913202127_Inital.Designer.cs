@@ -12,7 +12,7 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230910205552_Inital")]
+    [Migration("20230913202127_Inital")]
     partial class Inital
     {
         /// <inheritdoc />
@@ -54,7 +54,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "8ddd4765-c011-49c6-b93b-79b130fde8ad",
+                            ConcurrencyStamp = "9be71839-15f2-4b4e-a328-0423e67f40bf",
                             Name = "Admin"
                         });
                 });
@@ -152,15 +152,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4979305b-01d4-4159-acba-20983086dd33",
+                            ConcurrencyStamp = "9df6d7d8-229d-4d4f-b32a-c18232a4cf3a",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDVK9M454k9BnGppAdTmgA/vGq77k23C+3IlLzLfOd2J3qs4iIc+872gqv1Ic52Ryg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvQZaHG00kgUvlUeyrQaunpJJnDFfn0dVNQJ6RSB3xX7MmON8SHwYHRx6GEnwFDwg==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "d6148f5a-18f1-4bd2-b6e8-8fcd544e5701",
+                            SecurityStamp = "687fd4b0-dd27-493c-adb1-f10d9b943bd8",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -254,7 +254,7 @@ namespace WebApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TestAuth.Models.Post", b =>
+            modelBuilder.Entity("WebApp.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

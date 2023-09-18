@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Repositories;
 using WebApp.Services;
 using WebApp.Models;
+using Hangfire;
+using Hangfire.PostgreSql;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(c
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddHangfire(x => x.UsePostgreSqlStorage(connection));
+builder.Services.AddHangfireServer();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -42,6 +47,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHangfireDashboard("/dashboard");
+
 
 app.UseEndpoints(endpoints =>
 {

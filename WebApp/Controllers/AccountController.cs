@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Repositories;
@@ -46,6 +47,8 @@ namespace WebApp.Controllers
                         );
                     await _emailService.SendEmailAsync(model.Email, "Подтверждение почты",
                         $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>");
+
+                    BackgroundJob.Schedule(() => _accountRepository.DeleteUserAsync(user), TimeSpan.FromSeconds(60));
                     return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
                 }
                 else
