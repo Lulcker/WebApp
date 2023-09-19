@@ -48,7 +48,7 @@ namespace WebApp.Controllers
                     await _emailService.SendEmailAsync(model.Email, "Подтверждение почты",
                         $"Подтвердите регистрацию, перейдя по <a href='{callbackUrl}'>ссылке</a>");
 
-                    BackgroundJob.Schedule(() => _accountRepository.DeleteUserAsync(user), TimeSpan.FromSeconds(60));
+                    BackgroundJob.Schedule(() => _accountRepository.DeleteUserAsync(user), TimeSpan.FromMinutes(15));
                     return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
                 }
                 else

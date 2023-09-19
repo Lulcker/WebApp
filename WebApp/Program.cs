@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder();
 string? connection = builder.Configuration.GetConnectionString("connect");
 
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders();
@@ -25,6 +26,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 8;
 });
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
+    options.TokenLifespan = TimeSpan.FromMinutes(15));
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

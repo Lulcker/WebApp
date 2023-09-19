@@ -51,7 +51,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "9be71839-15f2-4b4e-a328-0423e67f40bf",
+                            ConcurrencyStamp = "e8b5f639-80a3-45dd-a991-327563cf21a2",
                             Name = "Admin"
                         });
                 });
@@ -149,15 +149,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9df6d7d8-229d-4d4f-b32a-c18232a4cf3a",
+                            ConcurrencyStamp = "bd93d1a7-c926-49ed-b18b-d27fece8094c",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFvQZaHG00kgUvlUeyrQaunpJJnDFfn0dVNQJ6RSB3xX7MmON8SHwYHRx6GEnwFDwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDsPY+7Pa7lguWvIFzirAwi9aL5D18YZSWQ+nmdKtt/tf5VEJS99xUWJ1K21BGBsqg==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "687fd4b0-dd27-493c-adb1-f10d9b943bd8",
+                            SecurityStamp = "ad33a954-675e-4a4f-9bd1-271e694923cc",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -278,7 +278,7 @@ namespace WebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

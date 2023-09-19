@@ -1,6 +1,6 @@
 ﻿@model WebApp.ViewModels.IndexViewModel
 
-<h1 class="test">Index</h1>
+<h1>Index</h1>
 @if (!User.Identity.IsAuthenticated)
 {
     <a asp-controller="Account" asp-action="Login">Войти</a>
@@ -17,25 +17,23 @@
 }
 
 <h2>Список постов</h2>
-<table>
-    <tr><th>Title</th><th>Description</th><th>Author</th></tr>
-    @foreach (var item in Model.Posts)
+
+    
+    @foreach (var post in Model.Posts)
     {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.Description</td>
-            <td>@item.Author</td>
+        <div class="form">
+            <partial name="_PostCard" model="post"/>
+        </div>
+            <!--
             <td>
-                <img src="@Url.Content(@item.PathToImage)" alt="@item.Title">
-            </td>
-            <td>
-                <form asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">
+                <form asp-controller="Home" asp-action="Details" asp-route-id="@post.Id">
                     <input type="submit" value="Details">
                 </form>
             </td>
-        </tr>
+        -->
+
     }
-</table>
+
 <p>
     @if (Model.PagingInfo.HasPreviousPage)
     {

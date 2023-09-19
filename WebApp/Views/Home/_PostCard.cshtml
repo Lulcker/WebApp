@@ -1,0 +1,22 @@
+﻿@model WebApp.Models.Post
+
+<div class="baseForm">
+    <div class="content">
+        <a asp-action="Details" asp-controller="Home" asp-route-id="@Model.Id">
+            <div class="imageForm">
+                <img src="@Url.Content(@Model.PathToImage)" alt="@Model.Title" />
+            </div>
+        </a>
+        <div class="text">
+            <div class="titlePost">
+                <h4>@Model.Title</h4>
+            </div>
+            <div action="descriptionPost">
+                <p>@Model.Description</p>
+            </div>
+            <div class="authorPost">
+                <p>@Model.Author</p>
+            </div>
+        </div>
+    </div>
+</div>
