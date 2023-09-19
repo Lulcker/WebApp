@@ -12,7 +12,7 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230919094249_Inital")]
+    [Migration("20230919142605_Inital")]
     partial class Inital
     {
         /// <inheritdoc />
@@ -54,7 +54,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "e8b5f639-80a3-45dd-a991-327563cf21a2",
+                            ConcurrencyStamp = "d8e0ee9d-fd51-4f13-bac4-de5e88bf9fd3",
                             Name = "Admin"
                         });
                 });
@@ -152,15 +152,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd93d1a7-c926-49ed-b18b-d27fece8094c",
+                            ConcurrencyStamp = "f1ba5fa4-fe38-4261-8944-f41e96f84063",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDsPY+7Pa7lguWvIFzirAwi9aL5D18YZSWQ+nmdKtt/tf5VEJS99xUWJ1K21BGBsqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDycQKjEsKud34t31Yocj4xxJOHDYCASj+HJM0ETQgvNl6kZtVD4R4KrSa+uq5Da/w==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "ad33a954-675e-4a4f-9bd1-271e694923cc",
+                            SecurityStamp = "5de08a65-00fb-4a46-99a1-344ebce2277b",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
