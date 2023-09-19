@@ -26,6 +26,9 @@
             <td>@item.Description</td>
             <td>@item.Author</td>
             <td>
+                <img src="@Url.Content(@item.PathToImage)" alt="@item.Title">
+            </td>
+            <td>
                 <form asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">
                     <input type="submit" value="Details">
                 </form>

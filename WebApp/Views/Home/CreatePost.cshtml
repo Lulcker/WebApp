@@ -1,7 +1,7 @@
 ﻿@model WebApp.ViewModels.AddPostModel
 <h1>Create Post</h1>
 
-<form method="post" asp-controller="Home" asp-action="CreatePost">
+<form method="post" asp-controller="Home" asp-action="CreatePost" enctype="multipart/form-data">
     <p>
         <label asp-for="Title">Title</label><br />
         <input asp-for="Title" />
@@ -15,6 +15,16 @@
     <p>
         <input asp-for="Author"  type="hidden"/>
     </p>
+    <p>
+        <input type="file" asp-for="Image" />
+        <label asp-for="Image">&nbsp;</label>
+    </p>
+    @if (!string.IsNullOrWhiteSpace(Model.PathToImage))
+    {
+        <div>
+            <img src="@Url.Content(Model.PathToImage)" alt="" />
+        </div>
+    }
     <p>
         <input type="submit" value="Добавить" />
     </p>

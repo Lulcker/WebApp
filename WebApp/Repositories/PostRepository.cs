@@ -7,18 +7,24 @@ namespace WebApp.Repositories
     public class PostRepository : IPostRepository
     {
         private readonly ApplicationContext _db;
-        public PostRepository(ApplicationContext db) 
+        private readonly IImageRepository _imageRepository;
+        public PostRepository(ApplicationContext db, IImageRepository imageRepository)
         {
             _db = db;
+            _imageRepository = imageRepository;
         }
 
         public async Task AddPostAsync(AddPostModel model)
         {
+            string extension = Path.GetExtension(model.Image.FileName);
+            model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());
+
             var Post = new Post
             {
                 Author = model.Author,
                 Title = model.Title,
                 Description = model.Description,
+                PathToImage = model.PathToImage,
             };
 
             await _db.Posts.AddAsync(Post);

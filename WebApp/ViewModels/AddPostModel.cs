@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.ViewModels
 {
@@ -12,5 +14,12 @@ namespace WebApp.ViewModels
 
         [Required(ErrorMessage = "Поле обязательно для ввода")]
         public string? Author { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        [HiddenInput]
+        public string? PathToImage { get; set; }
+
+        [DisplayName("Постер")]
+        public IFormFile Image { get; set; }
     }
 }
