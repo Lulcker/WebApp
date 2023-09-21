@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Models
 {
-    public class ApplicationContext : IdentityDbContext
+    public class ApplicationContext : IdentityDbContext<User>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         public DbSet<Post> Posts { get; set; } = null!;
+        public DbSet<UserState> UserStates { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,8 +22,8 @@ namespace WebApp.Models
                 );
 
             var hasher = new PasswordHasher<IdentityUser>();
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
+            modelBuilder.Entity<User>().HasData(
+                new User
                 {
                     Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                     UserName = "Admin",
@@ -32,7 +33,8 @@ namespace WebApp.Models
                     PasswordHash = hasher.HashPassword(user: null, "Admin123"),
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
-                    SecurityStamp = Guid.NewGuid().ToString()
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserStateId = 1
                 });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
@@ -41,6 +43,13 @@ namespace WebApp.Models
                     RoleId = "2c5e174e-3b1e-446f-86af-483d56fd7210",
                     UserId = "2c5e174e-3b0e-446f-86af-483d56fd7211"
                 });
+
+            modelBuilder.Entity<UserState>().HasData(
+                new UserState { Id = 1, Code = "Active" },
+                new UserState { Id = 2, Code = "Blocked" }
+                );
+
+            modelBuilder.Entity<User>().Property(x => x.UserStateId).HasDefaultValue(1);
         }
     }
 }

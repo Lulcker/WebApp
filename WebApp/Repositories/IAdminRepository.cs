@@ -11,8 +11,12 @@ namespace WebApp.Repositories
 
         Task CancelPostAsync(int id);
 
-        Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
+        Task<IEnumerable<User>> GetAllUsersAsync();
 
         Task<IEnumerable<Post>> GetNewPostAsync();
+
+        Task BlockedUser(string id);
+
+        Task UnblockedUser(string id);
     }
 }

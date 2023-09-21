@@ -9,12 +9,10 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IPostRepository _postRepository;
-        private readonly IImageRepository _imageRepository;
 
-        public HomeController(IPostRepository postRepository, IImageRepository imageRepository)
+        public HomeController(IPostRepository postRepository)
         {
             _postRepository = postRepository;
-            _imageRepository = imageRepository;
         }
 
         [AllowAnonymous]

@@ -7,9 +7,11 @@ namespace WebApp.Repositories
     public class AdminRepository : IAdminRepository
     {
         private readonly ApplicationContext _db;
-        public AdminRepository(ApplicationContext db)
+        private readonly UserManager<User> _userManager;
+        public AdminRepository(ApplicationContext db, UserManager<User> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<Post>> GetAllPostAsync()
@@ -45,10 +47,32 @@ namespace WebApp.Repositories
             }
         }
 
-        public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            var users = await _db.Users.ToListAsync();
+            var users = await _db.Users.Include(u => u.UserState).Where(u => u.UserName != "Admin").ToListAsync();
             return users;
+        }
+
+        public async Task BlockedUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                user.UserStateId = 2;
+                _db.Users.Update(user);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnblockedUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                user.UserStateId = 1;
+                _db.Users.Update(user);
+                await _db.SaveChangesAsync();
+            }
         }
     }
 }
