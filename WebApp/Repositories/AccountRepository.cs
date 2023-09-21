@@ -1,44 +1,45 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WebApp.Models;
 using WebApp.ViewModels;
 
 namespace WebApp.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountRepository(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountRepository(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(IdentityUser user, RegisterModel model)
+        public async Task<IdentityResult> CreateAsync(User user, RegisterModel model)
         {
             var result = await _userManager.CreateAsync(user, model.Password);
             return result;
         }
 
-        public async Task<string> GenerateEmailConfirmationTokenAsync(IdentityUser user)
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             return code;
         }
 
-        public async Task<IdentityUser> FindByIdAsync(string userId)
+        public async Task<User> FindByIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             return user;
         }
 
-        public async Task<IdentityResult> ConfirmEmailAsync(IdentityUser user, string code)
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string code)
         {
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return result;
         }
 
-        public async Task SignInAsync(IdentityUser user)
+        public async Task SignInAsync(User user)
         {
             await _signInManager.SignInAsync(user, false);
         }
@@ -55,10 +56,19 @@ namespace WebApp.Repositories
             await _signInManager.SignOutAsync();
         }
 
-        public async Task DeleteUserAsync(IdentityUser user)
+        public async Task DeleteUserAsync(User user)
         {
             if (!user.EmailConfirmed)
                 await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<bool> IsActiveUser(LoginModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Login);
+            if (user?.UserStateId == 2)
+                return false;
+            else
+                return true;
         }
     }
 }

@@ -1,12 +1,29 @@
-﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+﻿@model IEnumerable<WebApp.Models.User>
 
 <table>
-    <tr><th>UserName</th><th>Email</th></tr>
-    @foreach (var item in Model)
+    <tr><th>UserName</th><th>Email</th><th>Code</th></tr>
+    @foreach (var user in Model)
     {
         <tr>
-            <td>@item.UserName</td>
-            <td>@item.Email</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@user.UserState?.Code</td>
+            @if (user.UserStateId == 1)
+            {
+                <td>
+                    <form asp-controller="Home" asp-action="BlockedUser" asp-route-id="@user.Id" method="post">
+                        <input type="submit" value="Заблокировать" />
+                    </form>
+                </td>
+            }
+            @if (user.UserStateId == 2)
+            {
+                <td>
+                    <form asp-controller="Home" asp-action="UnblockedUser" asp-route-id="@user.Id" method="post">
+                        <input type="submit" value="Разблокировать" />
+                    </form>
+                </td>
+            }
         </tr>
     }
 </table>

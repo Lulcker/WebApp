@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
 using WebApp.Repositories;
 using WebApp.Services;
 using WebApp.ViewModels;
@@ -27,7 +28,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = model.Email,
                 UserName = model.Login,
@@ -99,22 +100,31 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _accountRepository.PasswordSignInAsync(model);
-                if (result.Succeeded)
+                var isActiveUser = await _accountRepository.IsActiveUser(model);
+                if (isActiveUser)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    var result = await _accountRepository.PasswordSignInAsync(model);
+                    if (result.Succeeded)
                     {
-                        return LocalRedirect(model.ReturnUrl);
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return LocalRedirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", "Неверный логин или пароль");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин / пароль");
+                    ModelState.AddModelError("", "Аккаунт заблокирован");
                 }
+                
             }
             return View(model);
         }

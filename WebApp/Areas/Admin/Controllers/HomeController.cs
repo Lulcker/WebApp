@@ -45,5 +45,17 @@ namespace WebApp.Areas.Admin.Controllers
             await _adminRepository.CancelPostAsync(id);
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> BlockedUser(string id)
+        {
+            await _adminRepository.BlockedUser(id);
+            return RedirectToAction("UsersControl", "Home");
+        }
+
+        public async Task<IActionResult> UnblockedUser(string id)
+        {
+            await _adminRepository.UnblockedUser(id);
+            return RedirectToAction("UsersControl", "Home");
+        }
     }
 }
