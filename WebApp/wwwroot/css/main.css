@@ -1,24 +1,168 @@
-﻿.form{
-    display: flex;
-    justify-content: center;
+﻿:root {
+    --curve: 40;
 }
 
+.form{
+    display: flex;
+    justify-content: space-evenly;
+}
 .baseForm{
+    width: 100%;
+}
+.content {
+    position: relative;
+    display: block;
     width: 500px;
     height: 600px;
-    border: 5px solid;
+    border-radius: calc(var(--curve) * 1px);
+    background-color: #ededdf;
+    overflow: hidden;
+    text-decoration: none;
 }
-.content{
-    width: 460px;
-    height: 580px;
+/*.img_content {
     display: flex;
     justify-content: center;
-    
+    margin-top: 10px;
+} */
+.imageForm {
+    width: 100%;
+    height: auto;
 }
-img > .imageForm{
+.content_header {
+    width: 200px;
+    background-color: #ededdf;
+}
+.content_1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border-radius: calc(var(--curve) * 1px);
+    background-color: #ededdf;
+    transform: translateY(100%);
+    transition: .2s ease-in-out;
+}
+.content:hover .content_1 {
+    transform: translateY(0);
+}
+.content_2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    padding: 1em 0 0 2em;
+    border-radius: calc(var(--curve) * 1px) 0 0 0;
+    background-color: #ededdf;
+    transform: translateY(-100%);
+    transition: .2s ease-in-out;
+}
+.content:hover .content_2 {
+    transform: translateY(0);
+}
+.titlePost {
+    font-size: 2em;
+    margin: 0 0 .2em;
+    color: #64665d;
+    font-family: "MockFlowFont";
+}
+.authorPost {
+    font-size: 1em;
+    color: #888a80;
+}
+.descriptionPost {
+    padding: 0 2em 2em;
+    margin: 0;
+    color: #64665d;
+    font-family: "MockFlowFont";
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+/*.content {
+    width: 500px;
+    height: 600px;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 16px 0px #26262629;
+    border: 1px solid #626262;
+    border-radius: 15px;
+    margin-left: 8px;
+    margin-right: 8px;
+    font-family: Arial;
+}
+.content_1{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.content_2{
+    width: 100%;
+}
+.imageForm > img {
+    width: 430px;
+    height: 370px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.img_content {
+    width: 100%;
+    height: 420px;
+    padding-top: 20px;
+    background-color: #f7f7f7;
+}
+.text {
+    width: 460px;
+    height: 180px;
+    display: inline-block;
+}
+.text_1{
+    display: flex;
+    justify-content:center;
+    margin-top: 0;
+}
+.titlePost {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #1D1D1D;
+    margin-bottom: 4px;
+    display: block;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    font-family: Verdana;
+}
+.descriptionPost{
+    font-size: 20px;
+    margin-top: 5px;
+}
+    .baseForm{
+    max-width: 500px;
+    height: 600px;
+    border: 5px solid;
+    display: block;
+}
+.content {
+    width: 92%;
+    height: 96%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.imgcontent {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+.imageForm > img{
     width: 460px;
     height: 400px;
-    margin: 10px, 20px, 10px, 20px;
+    
+   
 }
 .text{
     height: 180px;
@@ -40,4 +184,4 @@ img > .imageForm{
     height: 50px;
     width: 460px;
     margin: 5px, 20px, 5px, 20px;
-}
+}*/
