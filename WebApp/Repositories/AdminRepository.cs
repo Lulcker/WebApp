@@ -60,7 +60,7 @@ namespace WebApp.Repositories
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            var users = await _db.Users.Include(u => u.UserState).Where(u => u.UserName != "Admin").ToListAsync();
+            var users = await _db.Users.Where(u => u.UserName != "Admin").ToListAsync();
             return users;
         }
 
@@ -70,7 +70,7 @@ namespace WebApp.Repositories
             if (user != null)
             {
                 user.ReasonBlocking = model.ReasonBlocking;
-                user.UserStateId = 2;
+                user.LockoutEnd = model.LockoutEnd.ToUniversalTime();
                 _db.Users.Update(user);
                 await _db.SaveChangesAsync();
             }
@@ -81,7 +81,8 @@ namespace WebApp.Repositories
             var user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                user.UserStateId = 1;
+                user.ReasonBlocking = "";
+                user.LockoutEnd = null;
                 _db.Users.Update(user);
                 await _db.SaveChangesAsync();
             }

@@ -1,6 +1,5 @@
 ﻿using Hangfire;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 using WebApp.Repositories;
@@ -101,7 +100,7 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _accountRepository.FindByNameAsync(model);
-                if (user.UserStateId == 1)
+                if (user?.LockoutEnd == null)
                 {
                     var result = await _accountRepository.PasswordSignInAsync(model);
                     if (result.Succeeded)
@@ -122,7 +121,7 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", $"Аккаунт заблокирован по причине: {user.ReasonBlocking}");
+                    ModelState.AddModelError("", $"Аккаунт заблокирован до {user.LockoutEnd.Value.ToString("D")} по причине: {user.ReasonBlocking}");
                 }
                 
             }

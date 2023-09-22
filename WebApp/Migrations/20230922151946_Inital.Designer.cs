@@ -12,7 +12,7 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230922115905_Inital")]
+    [Migration("20230922151946_Inital")]
     partial class Inital
     {
         /// <inheritdoc />
@@ -54,7 +54,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "5b62cf1d-d20d-46f3-9db9-1ebb18a53e9d",
+                            ConcurrencyStamp = "beda1fc7-2e11-486b-99f4-691d0d88ae72",
                             Name = "Admin"
                         });
                 });
@@ -257,11 +257,6 @@ namespace WebApp.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<int>("UserStateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -271,8 +266,6 @@ namespace WebApp.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("UserStateId");
-
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
@@ -280,46 +273,17 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "95ecbbea-910e-4eb5-b94c-1a577a3157b9",
+                            ConcurrencyStamp = "049288b0-aa4b-463a-b1b2-af7f42d7cfdd",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAED0IW/Nm7BmgZ86sKhXAmNnDvayubiSNkWfRpWh7WkrTNPvwAMxOkRq52GT2YqmUBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECzyiyNtU3SrO35M0PdN4ztKKsyy8zugzxjzS7b5cKe+eEZuBEFpx9jy7kA0ymay+A==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "08250f9f-fad3-4238-b073-3fea2ba518b0",
+                            SecurityStamp = "79b60b5f-29cb-4a75-a530-e9ba71562e6f",
                             TwoFactorEnabled = false,
-                            UserName = "Admin",
-                            UserStateId = 1
-                        });
-                });
-
-            modelBuilder.Entity("WebApp.Models.UserState", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserStates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "Blocked"
+                            UserName = "Admin"
                         });
                 });
 
@@ -372,22 +336,6 @@ namespace WebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WebApp.Models.User", b =>
-                {
-                    b.HasOne("WebApp.Models.UserState", "UserState")
-                        .WithMany("User")
-                        .HasForeignKey("UserStateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserState");
-                });
-
-            modelBuilder.Entity("WebApp.Models.UserState", b =>
-                {
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

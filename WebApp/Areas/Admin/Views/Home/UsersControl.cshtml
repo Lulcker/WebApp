@@ -1,23 +1,26 @@
 ﻿@model IEnumerable<WebApp.Models.User>
 
 <table>
-    <tr><th>UserName</th><th>Email</th><th>Code</th></tr>
+    <tr><th>Логин</th><th>Email</th><th>Время блокировки</th><th>Причина блокировки</th></tr>
     @foreach (var user in Model)
     {
         <tr>
             <td>@user.UserName</td>
             <td>@user.Email</td>
-            <td>@user.UserState?.Code</td>
-            @if (user.UserStateId == 1)
+            @if (user.LockoutEnd == null)
             {
+                <td>нет</td>
+                <td>нет</td>
                 <td>
                     <form asp-controller="Home" asp-action="BlockedUser" asp-route-id="@user.Id" method="get">
                         <input type="submit" value="Заблокировать"/>
                     </form>
                 </td>
             }
-            @if (user.UserStateId == 2)
+            @if (user.LockoutEnd != null)
             {
+                <td>@user.LockoutEnd</td>
+                <td>@user.ReasonBlocking</td>
                 <td>
                     <form asp-controller="Home" asp-action="UnblockedUser" asp-route-id="@user.Id" method="post">
                         <input type="submit" value="Разблокировать" />
