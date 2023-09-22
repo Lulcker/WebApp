@@ -12,7 +12,7 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230921085040_Inital")]
+    [Migration("20230922095126_Inital")]
     partial class Inital
     {
         /// <inheritdoc />
@@ -54,7 +54,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "89e3f449-089b-4f41-b425-a8c96ecb0368",
+                            ConcurrencyStamp = "fb1b84df-75bd-4fe6-908d-89f2454d4ddf",
                             Name = "Admin"
                         });
                 });
@@ -244,6 +244,9 @@ namespace WebApp.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ReasonBlocking")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -277,15 +280,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e995943-c770-49b6-a084-25d62be3cbb8",
+                            ConcurrencyStamp = "d8591099-98fc-46ed-a7c9-7bcaac806216",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE4NEhta9FtO9rVKroOfEeqZbtIqOl9TbiKL9W0fOmbUSI4eOsQ+JZQSLhsgIUqJJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJq/Vl10OLW5a9OdB17OwX3TQMCB20EiqKh1B54Mml5w+vPLZGd/HVTDGqLcGzqloA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "222086d5-f530-491a-bb79-136103ed4c92",
+                            SecurityStamp = "67a1be10-ac32-4736-9482-151dd11c4704",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             UserStateId = 1

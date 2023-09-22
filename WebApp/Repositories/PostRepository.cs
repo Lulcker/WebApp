@@ -14,7 +14,7 @@ namespace WebApp.Repositories
             _imageRepository = imageRepository;
         }
 
-        public async Task AddPostAsync(AddPostModel model)
+        public async Task AddPostAsync(CreatePostModel model)
         {
             string extension = Path.GetExtension(model.Image.FileName);
             model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());

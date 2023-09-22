@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Repositories;
+using WebApp.ViewModels;
 
 namespace WebApp.Areas.Admin.Controllers
 {
@@ -33,6 +34,13 @@ namespace WebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            await _adminRepository.DeletePost(id);
+            return RedirectToAction("AllPost", "Home");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AcceptPost(int id)
         {
             await _adminRepository.AcceptPostAsync(id);
@@ -46,9 +54,18 @@ namespace WebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> BlockedUser(string id)
+        [HttpGet]
+        [Route("/Admin/Home/{id}/BlockedUser")]
+        public IActionResult BlockedUser(string id)
         {
-            await _adminRepository.BlockedUser(id);
+            return View(EmptyModel(id));
+        }
+
+        [HttpPost]
+        [Route("/Admin/Home/{id}/BlockedUser")]
+        public async Task<IActionResult> BlockedUser(BlockedUserModel model)
+        {
+            await _adminRepository.BlockedUser(model);
             return RedirectToAction("UsersControl", "Home");
         }
 
@@ -56,6 +73,14 @@ namespace WebApp.Areas.Admin.Controllers
         {
             await _adminRepository.UnblockedUser(id);
             return RedirectToAction("UsersControl", "Home");
+        }
+
+        private BlockedUserModel EmptyModel(string id)
+        {
+            return new BlockedUserModel
+            {
+                Id = id
+            };
         }
     }
 }

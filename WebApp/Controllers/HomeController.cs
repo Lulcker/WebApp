@@ -30,7 +30,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(AddPostModel model)
+        public async Task<IActionResult> CreatePost(CreatePostModel model)
         {
             await _postRepository.AddPostAsync(model);
             return RedirectToAction("Index", "Home");
@@ -44,9 +44,9 @@ namespace WebApp.Controllers
             return View(post);
         }
 
-        private AddPostModel EmptyModel()
+        private CreatePostModel EmptyModel()
         {
-            return new AddPostModel
+            return new CreatePostModel
             {
                 Author = User.Identity.Name
             };

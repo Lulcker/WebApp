@@ -84,6 +84,7 @@ namespace WebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    ReasonBlocking = table.Column<string>(type: "text", nullable: true),
                     UserStateId = table.Column<int>(type: "integer", nullable: false, defaultValue: 1),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -199,7 +200,7 @@ namespace WebApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2c5e174e-3b1e-446f-86af-483d56fd7210", "89e3f449-089b-4f41-b425-a8c96ecb0368", "Admin", null });
+                values: new object[] { "2c5e174e-3b1e-446f-86af-483d56fd7210", "fb1b84df-75bd-4fe6-908d-89f2454d4ddf", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "UserStates",
@@ -212,8 +213,8 @@ namespace WebApp.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserStateId" },
-                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7211", 0, "5e995943-c770-49b6-a084-25d62be3cbb8", "admin@mail.ru", true, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEE4NEhta9FtO9rVKroOfEeqZbtIqOl9TbiKL9W0fOmbUSI4eOsQ+JZQSLhsgIUqJJQ==", null, true, "222086d5-f530-491a-bb79-136103ed4c92", false, "Admin", 1 });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ReasonBlocking", "SecurityStamp", "TwoFactorEnabled", "UserName", "UserStateId" },
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7211", 0, "d8591099-98fc-46ed-a7c9-7bcaac806216", "admin@mail.ru", true, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEJq/Vl10OLW5a9OdB17OwX3TQMCB20EiqKh1B54Mml5w+vPLZGd/HVTDGqLcGzqloA==", null, true, null, "67a1be10-ac32-4736-9482-151dd11c4704", false, "Admin", 1 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

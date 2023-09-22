@@ -1,0 +1,15 @@
+﻿@model WebApp.ViewModels.BlockedUserModel
+
+<form asp-controller="Home" asp-action="BlockedUser" method="post">
+    <p>
+        <label asp-for="ReasonBlocking" >Причина блокировки пользователя:</label><br />
+        <input type="text" asp-for="ReasonBlocking" />
+    </p>
+    <p>
+        <input asp-for="Id" type="hidden" />
+    </p>
+    <p>
+        <input type="submit" value="Заблокировать пользователя" />
+    </p>
+</form>
+<a asp-controller="Home" asp-action="UsersControl" >Index</a>
