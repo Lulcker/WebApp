@@ -11,8 +11,8 @@
             @if (user.UserStateId == 1)
             {
                 <td>
-                    <form asp-controller="Home" asp-action="BlockedUser" asp-route-id="@user.Id" method="post">
-                        <input type="submit" value="Заблокировать" />
+                    <form asp-controller="Home" asp-action="BlockedUser" asp-route-id="@user.Id" method="get">
+                        <input type="submit" value="Заблокировать"/>
                     </form>
                 </td>
             }

@@ -5,7 +5,7 @@ namespace WebApp.Repositories
 {
     public interface IPostRepository
     {
-        Task AddPostAsync(AddPostModel model);
+        Task AddPostAsync(CreatePostModel model);
 
         Task<IndexViewModel> GetAllPostAsync(int pageCount, int pageNumber, int pageSize = 5);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using WebApp.Models;
+using WebApp.ViewModels;
 
 namespace WebApp.Repositories
 {
@@ -11,11 +12,13 @@ namespace WebApp.Repositories
 
         Task CancelPostAsync(int id);
 
+        Task DeletePost(int id);
+
         Task<IEnumerable<User>> GetAllUsersAsync();
 
         Task<IEnumerable<Post>> GetNewPostAsync();
 
-        Task BlockedUser(string id);
+        Task BlockedUser(BlockedUserModel model);
 
         Task UnblockedUser(string id);
     }

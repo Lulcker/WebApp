@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using WebApp.ViewModels;
 
 namespace WebApp.Repositories
 {
@@ -18,6 +19,16 @@ namespace WebApp.Repositories
         {
             var posts = await _db.Posts.ToListAsync();
             return posts;
+        }
+
+        public async Task DeletePost(int id)
+        {
+            var post = await _db.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            if (post != null)
+            {
+                _db.Posts.Remove(post);
+                await _db.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<Post>> GetNewPostAsync()
@@ -53,11 +64,12 @@ namespace WebApp.Repositories
             return users;
         }
 
-        public async Task BlockedUser(string id)
+        public async Task BlockedUser(BlockedUserModel model)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(model.Id);
             if (user != null)
             {
+                user.ReasonBlocking = model.ReasonBlocking;
                 user.UserStateId = 2;
                 _db.Users.Update(user);
                 await _db.SaveChangesAsync();

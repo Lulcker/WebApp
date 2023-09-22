@@ -22,6 +22,6 @@ namespace WebApp.Repositories
 
         Task DeleteUserAsync(User user);
 
-        Task<bool> IsActiveUser(LoginModel model);
+        Task<User> FindByNameAsync(LoginModel model);
     }
 }

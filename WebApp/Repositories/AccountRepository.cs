@@ -62,13 +62,10 @@ namespace WebApp.Repositories
                 await _userManager.DeleteAsync(user);
         }
 
-        public async Task<bool> IsActiveUser(LoginModel model)
+        public async Task<User> FindByNameAsync(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Login);
-            if (user?.UserStateId == 2)
-                return false;
-            else
-                return true;
+            return user;
         }
     }
 }

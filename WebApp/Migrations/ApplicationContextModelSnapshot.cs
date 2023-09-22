@@ -51,7 +51,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "080d9f44-46c7-446c-841c-a8c46a4f287f",
+                            ConcurrencyStamp = "5b62cf1d-d20d-46f3-9db9-1ebb18a53e9d",
                             Name = "Admin"
                         });
                 });
@@ -241,6 +241,9 @@ namespace WebApp.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ReasonBlocking")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -274,15 +277,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a30e44b1-bd38-43a3-b639-6d9db69d006c",
+                            ConcurrencyStamp = "95ecbbea-910e-4eb5-b94c-1a577a3157b9",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIzdA6FBz2uJEUCufuJaK0fzMPtlBEKrq8d9dlrmKI03HexN8ZrMjRtDLTxFCUZ/JA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED0IW/Nm7BmgZ86sKhXAmNnDvayubiSNkWfRpWh7WkrTNPvwAMxOkRq52GT2YqmUBw==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "5ca7be74-796f-4cb2-be2d-e57b2c2a9fe2",
+                            SecurityStamp = "08250f9f-fad3-4238-b073-3fea2ba518b0",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             UserStateId = 1

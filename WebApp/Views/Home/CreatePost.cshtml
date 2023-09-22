@@ -1,19 +1,19 @@
-﻿@model WebApp.ViewModels.AddPostModel
+﻿@model WebApp.ViewModels.CreatePostModel
 <h1>Create Post</h1>
 
-<form method="post" asp-controller="Home" asp-action="CreatePost" enctype="multipart/form-data">
+<form asp-controller="Home" asp-action="CreatePost" enctype="multipart/form-data" method="post" >
     <p>
-        <label asp-for="Title">Title</label><br />
+        <label asp-for="Title" >Название</label><br />
         <input asp-for="Title" />
         <span asp-validation-for="Title"/>
     </p>
     <p>
-        <label asp-for="Description">Description</label><br />
+        <label asp-for="Description" >Описание</label><br />
         <input asp-for="Description" />
         <span asp-validation-for="Description" />
     </p>
     <p>
-        <input asp-for="Author"  type="hidden"/>
+        <input asp-for="Author" type="hidden"/>
     </p>
     <p>
         <input type="file" asp-for="Image" />

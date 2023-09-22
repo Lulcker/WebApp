@@ -100,8 +100,8 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isActiveUser = await _accountRepository.IsActiveUser(model);
-                if (isActiveUser)
+                var user = await _accountRepository.FindByNameAsync(model);
+                if (user.UserStateId == 1)
                 {
                     var result = await _accountRepository.PasswordSignInAsync(model);
                     if (result.Succeeded)
@@ -122,7 +122,7 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Аккаунт заблокирован");
+                    ModelState.AddModelError("", $"Аккаунт заблокирован по причине: {user.ReasonBlocking}");
                 }
                 
             }
