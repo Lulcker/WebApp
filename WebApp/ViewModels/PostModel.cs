@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.ViewModels
 {
-    public class CreatePostModel
+    public class PostModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Поле обязательно для ввода")]
         [Display(Name = "Название")]
         public string? Title { get; set; }
@@ -14,6 +16,10 @@ namespace WebApp.ViewModels
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно для ввода")]
+        [Display(Name = "Содержание")]
+        public string? Content { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для ввода")]
         public string? Author { get; set; }
 
         [DataType(DataType.ImageUrl)]
@@ -21,6 +27,6 @@ namespace WebApp.ViewModels
         public string? PathToImage { get; set; }
 
         [Display(Name = "Постер")]
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

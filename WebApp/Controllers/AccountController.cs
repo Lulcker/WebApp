@@ -18,6 +18,7 @@ namespace WebApp.Controllers
             _accountRepository = accountRepository;
             _emailService = emailService;
         }
+
         [HttpGet]
         public IActionResult Register()
         {

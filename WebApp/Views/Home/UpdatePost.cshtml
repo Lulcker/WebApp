@@ -1,14 +1,14 @@
 ﻿@model WebApp.ViewModels.PostModel
-<h1>Create Post</h1>
+<h1>Update Post</h1>
 
-<form asp-controller="Home" asp-action="CreatePost" enctype="multipart/form-data" method="post" >
+<form asp-controller="Home" asp-action="UpdatePost" enctype="multipart/form-data" method="post">
     <p>
-        <label asp-for="Title" >Название</label><br />
+        <label asp-for="Title">Название</label><br />
         <input asp-for="Title" />
-        <span asp-validation-for="Title"/>
+        <span asp-validation-for="Title" />
     </p>
     <p>
-        <label asp-for="Description" >Описание</label><br />
+        <label asp-for="Description">Описание</label><br />
         <input asp-for="Description" />
         <span asp-validation-for="Description" />
     </p>
@@ -18,7 +18,7 @@
         <span asp-validation-for="Content" />
     </p>
     <p>
-        <input asp-for="Author" type="hidden"/>
+        <input asp-for="Author" type="hidden" />
     </p>
     <p>
         <input type="file" asp-for="Image" />
@@ -27,10 +27,17 @@
     <p>
         <input type="hidden" asp-for="PathToImage" />
     </p>
+    @if (!string.IsNullOrWhiteSpace(Model.PathToImage))
+    {
+        <div>
+            <img src="@Url.Content(Model.PathToImage)" alt="" />
+        </div>
+    }
     <p>
-        <input type="submit" value="Добавить" />
+        <input type="submit" value="Изменить" />
     </p>
 </form>
+
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>

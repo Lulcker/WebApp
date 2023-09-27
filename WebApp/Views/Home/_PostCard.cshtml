@@ -21,8 +21,14 @@
                             </div>
                     </div>
                 </div>
-                <div action="descriptionPost" class="descriptionPost">
+                <div class="descriptionPost">
                     <p>@Model.Description</p>
+                </div>
+                <div>
+                    @if (!Model.Update && User.Identity?.Name == Model.Author)
+                    {
+                        <a asp-action="UpdatePost" asp-controller="Home" asp-route-id="@Model.Id">Изменить пост</a>
+                    }
                 </div>
             </div>
         </div>

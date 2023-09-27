@@ -51,7 +51,7 @@ namespace WebApp.Migrations
                         new
                         {
                             Id = "2c5e174e-3b1e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "beda1fc7-2e11-486b-99f4-691d0d88ae72",
+                            ConcurrencyStamp = "f3e346b5-9698-40c1-9f55-f892945eb57f",
                             Name = "Admin"
                         });
                 });
@@ -180,6 +180,9 @@ namespace WebApp.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("text");
 
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -194,9 +197,48 @@ namespace WebApp.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
+                    b.Property<bool>("Update")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
                     b.HasKey("Id");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("WebApp.Models.UpdatePost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PathToImage")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId")
+                        .IsUnique();
+
+                    b.ToTable("UpdatePosts");
                 });
 
             modelBuilder.Entity("WebApp.Models.User", b =>
@@ -270,15 +312,15 @@ namespace WebApp.Migrations
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "049288b0-aa4b-463a-b1b2-af7f42d7cfdd",
+                            ConcurrencyStamp = "ab46d2c5-0a47-4c2d-b801-ce42395609ae",
                             Email = "admin@mail.ru",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECzyiyNtU3SrO35M0PdN4ztKKsyy8zugzxjzS7b5cKe+eEZuBEFpx9jy7kA0ymay+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECLbdvAKZJrNsXKCJJdgtBaKmI2b21ULNZ0+PwCvABjzHHTrdbVulgB28dC7AKLKpA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "79b60b5f-29cb-4a75-a530-e9ba71562e6f",
+                            SecurityStamp = "e5593b35-f9ab-4a62-a61a-0d7837da3498",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -333,6 +375,22 @@ namespace WebApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApp.Models.UpdatePost", b =>
+                {
+                    b.HasOne("WebApp.Models.Post", "Post")
+                        .WithOne("UpdatePost")
+                        .HasForeignKey("WebApp.Models.UpdatePost", "PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("WebApp.Models.Post", b =>
+                {
+                    b.Navigation("UpdatePost");
                 });
 #pragma warning restore 612, 618
         }

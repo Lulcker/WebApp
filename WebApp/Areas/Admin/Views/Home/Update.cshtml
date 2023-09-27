@@ -1,0 +1,39 @@
+﻿@model WebApp.ViewModels.PostModel
+<h1>Update Post</h1>
+
+<form asp-controller="Home" asp-action="Update" enctype="multipart/form-data" method="post">
+    <p>
+        <label asp-for="Title">Название</label><br />
+        <input asp-for="Title" />
+        <span asp-validation-for="Title" />
+    </p>
+    <p>
+        <label asp-for="Description">Описание</label><br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description" />
+    </p>
+    <p>
+        <label asp-for="Content">Содержимое</label><br />
+        <input asp-for="Content" />
+        <span asp-validation-for="Content" />
+    </p>
+    <p>
+        <input asp-for="Author" type="hidden" />
+    </p>
+    <p>
+        <input type="file" asp-for="Image" />
+        <label asp-for="Image">&nbsp;</label>
+    </p>
+    <p>
+        <input type="hidden" asp-for="PathToImage" />
+    </p>
+    @if (!string.IsNullOrWhiteSpace(Model.PathToImage))
+    {
+        <div>
+            <img src="@Url.Content(Model.PathToImage)" alt="" />
+        </div>
+    }
+    <p>
+        <input type="submit" value="Изменить" />
+    </p>
+</form>

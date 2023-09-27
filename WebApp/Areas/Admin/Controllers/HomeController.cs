@@ -10,9 +10,11 @@ namespace WebApp.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly IAdminRepository _adminRepository;
-        public HomeController(IAdminRepository adminRepository)
+        private readonly IPostRepository _postRepository;
+        public HomeController(IAdminRepository adminRepository, IPostRepository postRepository)
         {
             _adminRepository = adminRepository;
+            _postRepository = postRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -31,6 +33,12 @@ namespace WebApp.Areas.Admin.Controllers
         {
             var users = await _adminRepository.GetAllPostAsync();
             return View(users);
+        }
+
+        public async Task<IActionResult> AllUpdatePost()
+        {
+            var posts = await _adminRepository.GetAllUpdatePostAsync();
+            return View(posts);
         }
 
         [HttpPost]
@@ -58,7 +66,8 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("/Admin/Home/{id}/BlockedUser")]
         public IActionResult BlockedUser(string id)
         {
-            return View(EmptyModel(id));
+            var blockedModel = new BlockedUserModel { Id = id };
+            return View(blockedModel);
         }
 
         [HttpPost]
@@ -75,12 +84,41 @@ namespace WebApp.Areas.Admin.Controllers
             return RedirectToAction("UsersControl", "Home");
         }
 
-        private BlockedUserModel EmptyModel(string id)
+        public async Task<IActionResult> AcceptUpdatePost(int id)
         {
-            return new BlockedUserModel
+            await _adminRepository.AcceptUpdatePost(id);
+            return RedirectToAction("AllUpdatePost", "Home");
+        }
+
+        public async Task<IActionResult> CancelUpdatePost(int id)
+        {
+            await _adminRepository.CancelUpdatePost(id);
+            return RedirectToAction("AllUpdatePost", "Home");
+        }
+
+        [HttpGet]
+        [Route("/Home/{id:int}/Update")]
+        public async Task<IActionResult> Update(int id)
+        {
+            var post = await _postRepository.GetPostAsync(id);
+            var postModel = new PostModel
             {
-                Id = id
+                Id = id,
+                Title = post.Title,
+                Author = post.Author,
+                Description = post.Description,
+                Content = post.Content,
+                PathToImage = post.PathToImage
             };
+            return View(postModel);
+        }
+
+        [HttpPost]
+        [Route("/Home/{id:int}/Update")]
+        public async Task<IActionResult> Update(PostModel model)
+        {
+            await _adminRepository.Update(model);
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

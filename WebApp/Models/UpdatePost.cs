@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Models
 {
-    public class Post
+    public class UpdatePost
     {
         public int Id { get; set; }
 
@@ -14,10 +14,8 @@
 
         public string? PathToImage { get; set; }
 
-        public bool Enabled { get; set; }
+        public int PostId { get; set; }
 
-        public bool Update { get; set; }
-
-        public UpdatePost? UpdatePost { get; set; }
+        public Post? Post { get; set; }
     }
 }

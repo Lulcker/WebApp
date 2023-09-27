@@ -8,20 +8,20 @@ namespace WebApp.Repositories
     {
         Task<IdentityResult> CreateAsync(User user, RegisterModel model);
 
+        Task<IdentityResult> ConfirmEmailAsync(User user, string code);
+
         Task<SignInResult> PasswordSignInAsync(LoginModel model);
 
         Task<string> GenerateEmailConfirmationTokenAsync(User user);
 
         Task<User> FindByIdAsync(string userId);
 
-        Task<IdentityResult> ConfirmEmailAsync(User user, string code);
+        Task<User> FindByNameAsync(LoginModel model);
 
         Task SignInAsync(User user);
 
-        Task SignOutAsync();
-
         Task DeleteUserAsync(User user);
 
-        Task<User> FindByNameAsync(LoginModel model);
+        Task SignOutAsync();
     }
 }

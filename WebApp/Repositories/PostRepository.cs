@@ -14,7 +14,7 @@ namespace WebApp.Repositories
             _imageRepository = imageRepository;
         }
 
-        public async Task AddPostAsync(CreatePostModel model)
+        public async Task AddPostAsync(PostModel model)
         {
             string extension = Path.GetExtension(model.Image.FileName);
             model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());
@@ -24,7 +24,8 @@ namespace WebApp.Repositories
                 Author = model.Author,
                 Title = model.Title,
                 Description = model.Description,
-                PathToImage = model.PathToImage,
+                Content = model.Content,
+                PathToImage = model.PathToImage
             };
 
             await _db.Posts.AddAsync(Post);
@@ -46,6 +47,35 @@ namespace WebApp.Repositories
         {
             var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == id);
             return post;
+        }
+
+        public async Task UpdatePostAsync(PostModel model)
+        {
+            string? extension = Path.GetExtension(model.Image?.FileName);
+            if (extension != null)
+            {
+                model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());
+            }
+            
+
+            var updatePost = new UpdatePost
+            {
+                Author = model.Author,
+                Title = model.Title,
+                Description = model.Description,
+                Content = model.Content,
+                PathToImage = model.PathToImage
+            };
+
+            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == model.Id);
+            if (post != null)
+            {
+                post.Update = true;
+                post.UpdatePost = updatePost;
+                _db.Posts.Update(post);
+                await _db.UpdatePosts.AddAsync(updatePost);
+                await _db.SaveChangesAsync();
+            }
         }
 
         public async Task<int> PostCount()
