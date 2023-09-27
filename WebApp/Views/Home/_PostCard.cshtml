@@ -10,21 +10,29 @@
             </a>
         </div>
         <div class="content_header">
-            <div class="content_1">
                 <div class="content_2">
                     <div class="text-header">
                             <div class="titlePost">
                                 <a>@Model.Title</a>
                             </div>
-                            <div class="authorPost">
-                                <p>@Model.Author</p>
-                            </div>
                     </div>
                 </div>
-                <div action="descriptionPost" class="descriptionPost">
-                    <p>@Model.Description</p>
+                <div class="description">
+                    
+                        <p>@Model.Description</p>
+                    
                 </div>
-            </div>
+                <div class="botton_cart">
+                    <div class="authorPost">
+                        <p>@Model.Author</p>
+                    </div>
+                    <div class="button">
+                        @if (User.Identity?.Name == Model.Author || User.Identity?.Name == "Admin")
+                        {
+                            <a class="button_update" asp-action="Update" asp-controller="Home" asp-routeid="@Model.Id">Изменить пост</a>
+                        }
+                    </div>
+                </div>   
         </div>
     </div>
 </div>

@@ -17,13 +17,14 @@
 }
 
 <h2>Список постов</h2>
+<div class="Cards">
 @foreach (var post in Model.Posts)
 {
-    <div style="margin: 10px auto;">
+    <div  style="margin: 10px auto;">
         <partial name="_PostCard" model="post" />
     </div>
 }
-
+</div>
 <p>
     @if (Model.PagingInfo.HasPreviousPage)
     {

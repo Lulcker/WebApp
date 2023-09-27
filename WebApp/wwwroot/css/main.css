@@ -1,36 +1,127 @@
-﻿.baseForm {
-    background-color: aquamarine;
-    width: 500px;
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Unbounded:wght@500&display=swap');
+.Cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 80px 0 80px;
+}
+.baseForm {
+    width: 480px;
     height: 600px;
-    display: block;
+    position: relative;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.25);
+    border-radius: 12px;
+    filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
+    display: flex;
+    justify-content: center;
+    border: 2px solid #a1bff740;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+.content{
+    width:440px;
+    height: 560px;
+    
 }
 .img_content {
     height: 400px;
-    width: 500px;
-    display: flex;
+    width: 440px;
+    display:flex;
     justify-content: center;
-    align-items: center;
-    
+}
+
+.imageForm > img {
+    width: 420px;
+    max-width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    object-fit: fill;
+    object-position: bottom;
+    border: 2px solid #a1bff740;
+    box-sizing:border-box;
 }
 .imageForm {
-    max-width: 460px;
-    max-height: 400px;
-    background-size: cover;
-}
-.imageForm > img {
-    width: 460px;
-    height:380px;
+    overflow: hidden;
     border-radius: 12px;
-    border: 1px solid rgba(255,255,255, 0.255)
+}
+.imageForm > img:hover{
+    transition: 0.6s;
+    scale: 110%;
+}
+.content_header {
+    padding: 0 10px 0 10px;
+}
+.content_2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 .titlePost {
-    font-family: 'Righteous', sans-serif;
+    font-family: 'Unbounded', sans-serif;
     color: rgba(255,255,255,0.98);
     text-transform: uppercase;
-    font-size: 2.4rem;
+    font-size: 2em;
 }
-
-
+.authorPost {
+    margin: 0 0 0 0;
+    text-align: left;
+    font-size: 0.8em;
+    font-family: 'Unbounded', sans-serif;
+    color: rgba(237, 238, 240, 0.98);
+}
+.description {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.9em;
+    text-align: justify;
+    color: rgba(227, 228, 229, 0.98);
+    overflow-y: scroll;
+    display: block;
+    width: 420px;
+    height: 70px;
+}
+.description >p{
+    margin: 0;
+    padding-right:4px;
+}
+.description::-webkit-scrollbar{
+    width:4px;
+}
+.description::-webkit-scrollbar-track{
+    background-color: none;
+}
+.description::-webkit-scrollbar-thumb{
+    background-color: rgba(227, 228, 229, 0.98);
+    border-radius:5px;
+}
+.botton_cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+}
+.authorPost > p{
+    margin:0;
+}
+.button {
+    margin-top: 4px;
+}
+.button_update {
+    padding: 4px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.98);
+    border: 2px solid rgba(227, 228, 229, 0.98);
+    background-color: rgba(190, 197, 209, 0.25);
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.8em;
+    border-radius: 6px;
+}
+.button_update:hover {
+        background-color: rgba(225, 229, 235, 0.25);
+        color: rgba(16, 29, 54, 0.5);
+        transition: 0.2s;
+}
 /*:root {
     --curve: 40;
 }
