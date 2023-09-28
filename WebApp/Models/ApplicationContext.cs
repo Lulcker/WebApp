@@ -9,12 +9,14 @@ namespace WebApp.Models
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         public DbSet<Post> Posts { get; set; } = null!;
+        public DbSet<UpdatePost> UpdatePosts { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Post>().Property(x => x.Enabled).HasDefaultValue(false);
+            modelBuilder.Entity<Post>().Property(x => x.Update).HasDefaultValue(false);
 
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "2c5e174e-3b1e-446f-86af-483d56fd7210", Name = "Admin" }

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebApp.Models.UpdatePost>
+
+<table>
+    <tr><th>Title</th><th>Description</th><th>Content</th><th>Do Title</th><th>Do Description</th><th>Do Content</th></tr>
+    @foreach(var post in Model)
+    {
+        <tr>
+            <td>@post.Title</td>
+            <td>@post.Description</td>
+            <td>@post.Content</td>
+            <td>@post.Post?.Title</td>
+            <td>@post.Post?.Description</td>
+            <td>@post.Post?.Content</td>
+            <td>
+                <form asp-action="AcceptUpdatePost" asp-controller="Home" asp-route-id="@post.Id" method="post">
+                    <input type="submit" value="Одобрить изменения">
+                </form>
+            </td>
+            <td>
+                <form asp-action="CancelUpdatePost" asp-controller="Home" asp-route-id="@post.Id" method="post">
+                    <input type="submit" value="Отклонить изменения">
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<a asp-controller="Home" asp-action="Index">Назад</a>

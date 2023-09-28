@@ -26,15 +26,46 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult CreatePost()
         {
-            return View(EmptyModel());
+            var postModel = new PostModel
+            {
+                Author = User.Identity?.Name
+            };
+            return View(postModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(CreatePostModel model)
+        public async Task<IActionResult> CreatePost(PostModel model)
         {
             await _postRepository.AddPostAsync(model);
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        [Route("/Home/{id:int}/UpdatePost")]
+        public async Task<IActionResult> UpdatePost(int id)
+        {
+            var post = await _postRepository.GetPostAsync(id);
+            var postModel = new PostModel
+            {
+                Id = id,
+                Title = post.Title,
+                Author = post.Author,
+                Description = post.Description,
+                Content = post.Content,
+                PathToImage = post.PathToImage
+            };
+            return View(postModel);
+        }
+
+        [HttpPost]
+        [Route("/Home/{id:int}/UpdatePost")]
+        public async Task<IActionResult> UpdatePost(PostModel model)
+        {
+            await _postRepository.UpdatePostAsync(model);
+            return RedirectToAction("Index", "Home");
+        }
+
+        
 
         [AllowAnonymous]
         [Route("/Home/{id:int}/Details")]
@@ -42,14 +73,6 @@ namespace WebApp.Controllers
         {
             var post = await _postRepository.GetPostAsync(id);
             return View(post);
-        }
-
-        private CreatePostModel EmptyModel()
-        {
-            return new CreatePostModel
-            {
-                Author = User.Identity.Name
-            };
         }
     }
 }

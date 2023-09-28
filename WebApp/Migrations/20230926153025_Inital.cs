@@ -60,9 +60,11 @@ namespace WebApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
                     Author = table.Column<string>(type: "text", nullable: true),
                     PathToImage = table.Column<string>(type: "text", nullable: true),
-                    Enabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
+                    Enabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    Update = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -175,15 +177,39 @@ namespace WebApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UpdatePosts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    Author = table.Column<string>(type: "text", nullable: true),
+                    PathToImage = table.Column<string>(type: "text", nullable: true),
+                    PostId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UpdatePosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UpdatePosts_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2c5e174e-3b1e-446f-86af-483d56fd7210", "beda1fc7-2e11-486b-99f4-691d0d88ae72", "Admin", null });
+                values: new object[] { "2c5e174e-3b1e-446f-86af-483d56fd7210", "f3e346b5-9698-40c1-9f55-f892945eb57f", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ReasonBlocking", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7211", 0, "049288b0-aa4b-463a-b1b2-af7f42d7cfdd", "admin@mail.ru", true, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAECzyiyNtU3SrO35M0PdN4ztKKsyy8zugzxjzS7b5cKe+eEZuBEFpx9jy7kA0ymay+A==", null, true, null, "79b60b5f-29cb-4a75-a530-e9ba71562e6f", false, "Admin" });
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7211", 0, "ab46d2c5-0a47-4c2d-b801-ce42395609ae", "admin@mail.ru", true, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAECLbdvAKZJrNsXKCJJdgtBaKmI2b21ULNZ0+PwCvABjzHHTrdbVulgB28dC7AKLKpA==", null, true, null, "e5593b35-f9ab-4a62-a61a-0d7837da3498", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -226,6 +252,12 @@ namespace WebApp.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UpdatePosts_PostId",
+                table: "UpdatePosts",
+                column: "PostId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -247,13 +279,16 @@ namespace WebApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "UpdatePosts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
         }
     }
 }

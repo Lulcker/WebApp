@@ -1,7 +1,7 @@
 ﻿@model WebApp.ViewModels.IndexViewModel
 
 <h1>Index</h1>
-@if (!User.Identity.IsAuthenticated)
+@if (!User.Identity!.IsAuthenticated)
 {
     <a asp-controller="Account" asp-action="Login">Войти</a>
     <a asp-controller="Account" asp-action="Register">Регистрация</a>

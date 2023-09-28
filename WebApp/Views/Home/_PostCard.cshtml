@@ -27,9 +27,9 @@
                         <p>@Model.Author</p>
                     </div>
                     <div class="button">
-                        @if (User.Identity?.Name == Model.Author || User.Identity?.Name == "Admin")
+                    @if (!Model.Update && User.Identity?.Name == Model.Author)
                         {
-                            <a class="button_update" asp-action="Update" asp-controller="Home" asp-routeid="@Model.Id">Изменить пост</a>
+                            <a class="button_update" asp-action="UpdatePost" asp-controller="Home" asp-routeid="@Model.Id">Изменить пост</a>
                         }
                     </div>
                 </div>   
