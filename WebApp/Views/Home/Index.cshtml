@@ -32,6 +32,6 @@
     }
     @if (Model.PagingInfo.HasNextPage)
     {
-        <a asp-contoller="Home" asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber + 1)" >Вперёд</a>
+        <a asp-controller="Home" asp-action="Index" asp-route-page="@(Model.PagingInfo.PageNumber + 1)" >Вперёд</a>
     }
 </p>

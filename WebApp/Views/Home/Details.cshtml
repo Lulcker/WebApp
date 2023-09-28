@@ -19,8 +19,3 @@
         <input asp-for="Author" readonly />
     </p>
 </form>
-
-@if (User.Identity?.Name == "Admin")
-{
-    <a asp-area="Admin" asp-action="Update" asp-controller="Home" asp-route-id="@Model.Id">Изменить</a>
-}

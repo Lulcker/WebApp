@@ -10,11 +10,9 @@ namespace WebApp.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly IAdminRepository _adminRepository;
-        private readonly IPostRepository _postRepository;
-        public HomeController(IAdminRepository adminRepository, IPostRepository postRepository)
+        public HomeController(IAdminRepository adminRepository)
         {
             _adminRepository = adminRepository;
-            _postRepository = postRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -94,31 +92,6 @@ namespace WebApp.Areas.Admin.Controllers
         {
             await _adminRepository.CancelUpdatePost(id);
             return RedirectToAction("AllUpdatePost", "Home");
-        }
-
-        [HttpGet]
-        [Route("/Home/{id:int}/Update")]
-        public async Task<IActionResult> Update(int id)
-        {
-            var post = await _postRepository.GetPostAsync(id);
-            var postModel = new PostModel
-            {
-                Id = id,
-                Title = post.Title,
-                Author = post.Author,
-                Description = post.Description,
-                Content = post.Content,
-                PathToImage = post.PathToImage
-            };
-            return View(postModel);
-        }
-
-        [HttpPost]
-        [Route("/Home/{id:int}/Update")]
-        public async Task<IActionResult> Update(PostModel model)
-        {
-            await _adminRepository.Update(model);
-            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

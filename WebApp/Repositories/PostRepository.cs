@@ -19,7 +19,7 @@ namespace WebApp.Repositories
             string extension = Path.GetExtension(model.Image.FileName);
             model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());
 
-            var Post = new Post
+            var post = new Post
             {
                 Author = model.Author,
                 Title = model.Title,
@@ -28,7 +28,26 @@ namespace WebApp.Repositories
                 PathToImage = model.PathToImage
             };
 
-            await _db.Posts.AddAsync(Post);
+            await _db.Posts.AddAsync(post);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task AddPostAdminAsync(PostModel model)
+        {
+            string extension = Path.GetExtension(model.Image.FileName);
+            model.PathToImage = await _imageRepository.SaveImageAsync(extension, model.Image.OpenReadStream());
+
+            var post = new Post
+            {
+                Author = model.Author,
+                Title = model.Title,
+                Description = model.Description,
+                Content = model.Content,
+                PathToImage = model.PathToImage,
+                Enabled = true
+            };
+
+            await _db.Posts.AddAsync(post);
             await _db.SaveChangesAsync();
         }
 
@@ -74,6 +93,30 @@ namespace WebApp.Repositories
                 post.UpdatePost = updatePost;
                 _db.Posts.Update(post);
                 await _db.UpdatePosts.AddAsync(updatePost);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdatePostAdminAsync(PostModel updatePost)
+        {
+            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == updatePost.Id);
+            if (post != null)
+            {
+                if (updatePost.Image != null)
+                {
+                    string extension = Path.GetExtension(updatePost.Image.FileName);
+                    updatePost.PathToImage = await _imageRepository.SaveImageAsync(extension, updatePost.Image.OpenReadStream());
+
+                    _imageRepository.DeleteImage(Path.GetFileName(post.PathToImage));
+                }
+
+
+                post.Title = updatePost.Title;
+                post.Description = updatePost.Description;
+                post.Content = updatePost.Content;
+                post.PathToImage = updatePost.PathToImage;
+
+                _db.Posts.Update(post);
                 await _db.SaveChangesAsync();
             }
         }

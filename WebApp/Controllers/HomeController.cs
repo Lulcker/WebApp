@@ -36,7 +36,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostModel model)
         {
-            await _postRepository.AddPostAsync(model);
+            if (User.Identity?.Name == "Admin")
+            {
+                await _postRepository.AddPostAdminAsync(model);
+            }
+            else
+            {
+                await _postRepository.AddPostAsync(model);
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -54,6 +61,7 @@ namespace WebApp.Controllers
                 Content = post.Content,
                 PathToImage = post.PathToImage
             };
+            
             return View(postModel);
         }
 
@@ -61,7 +69,14 @@ namespace WebApp.Controllers
         [Route("/Home/{id:int}/UpdatePost")]
         public async Task<IActionResult> UpdatePost(PostModel model)
         {
-            await _postRepository.UpdatePostAsync(model);
+            if (User.Identity?.Name == "Admin")
+            {
+                await _postRepository.UpdatePostAdminAsync(model);
+            }
+            else
+            {
+                await _postRepository.UpdatePostAsync(model);
+            }
             return RedirectToAction("Index", "Home");
         }
 

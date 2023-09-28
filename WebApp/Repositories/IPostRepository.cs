@@ -14,6 +14,10 @@ namespace WebApp.Repositories
 
         Task UpdatePostAsync(PostModel model);
 
+        Task UpdatePostAdminAsync(PostModel updatePost);
+
         Task AddPostAsync(PostModel model);
+
+        Task AddPostAdminAsync(PostModel model);
     }
 }

@@ -26,7 +26,5 @@ namespace WebApp.Repositories
         Task AcceptUpdatePost(int id);
 
         Task CancelUpdatePost(int id);
-
-        Task Update(PostModel updatePost);
     }
 }

@@ -148,29 +148,5 @@ namespace WebApp.Repositories
                 }
             }
         }
-
-        public async Task Update(PostModel updatePost)
-        {
-            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == updatePost.Id);
-            if (post != null)
-            {
-                if (updatePost.Image != null)
-                {
-                    string extension = Path.GetExtension(updatePost.Image.FileName);
-                    updatePost.PathToImage = await _imageRepository.SaveImageAsync(extension, updatePost.Image.OpenReadStream());
-
-                    _imageRepository.DeleteImage(Path.GetFileName(post.PathToImage));
-                }
-                
-
-                post.Title = updatePost.Title;
-                post.Description = updatePost.Description;
-                post.Content = updatePost.Content;
-                post.PathToImage = updatePost.PathToImage;
-
-                _db.Posts.Update(post);
-                await _db.SaveChangesAsync();
-            }
-        }
     }
 }
