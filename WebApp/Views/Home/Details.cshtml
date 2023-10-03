@@ -3,12 +3,11 @@
 
 <form asp-controller="Home" asp-action="DetailsPost" asp-route-id="@Model.Id" method="get">
     <p>
-        <label asp-for="Title">Title</label><br />
-        <input asp-for="Title" readonly/>
+        @Model.Title
     </p>
     <p>
         <label asp-for="Description">Description</label><br />
-        <input asp-for="Description" readonly />
+        @Model.Description
     </p>
     <p>
         <label asp-for="Content">Content</label><br />

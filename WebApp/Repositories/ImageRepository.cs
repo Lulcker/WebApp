@@ -3,7 +3,6 @@
     public class ImageRepository : IImageRepository
     {
         private IWebHostEnvironment _environment;
-
         private readonly string _directoryName = "images";
 
         public string DirectoryImage { get; }

@@ -10,9 +10,11 @@ namespace WebApp.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly IAdminRepository _adminRepository;
-        public HomeController(IAdminRepository adminRepository)
+        private readonly IAdminCommandRepository _commandRepository;
+        public HomeController(IAdminRepository adminRepository, IAdminCommandRepository commandRepository)
         {
             _adminRepository = adminRepository;
+            _commandRepository = commandRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -42,21 +44,21 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePost(int id)
         {
-            await _adminRepository.DeletePost(id);
+            await _commandRepository.DeletePost(id);
             return RedirectToAction("AllPost", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> AcceptPost(int id)
         {
-            await _adminRepository.AcceptPostAsync(id);
+            await _commandRepository.AcceptPostAsync(id);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> CancelPost(int id)
         {
-            await _adminRepository.CancelPostAsync(id);
+            await _commandRepository.CancelPostAsync(id);
             return RedirectToAction("Index", "Home");
         }
 
@@ -72,25 +74,25 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("/Admin/Home/{id}/BlockedUser")]
         public async Task<IActionResult> BlockedUser(BlockedUserModel model)
         {
-            await _adminRepository.BlockedUser(model);
+            await _commandRepository.BlockedUser(model);
             return RedirectToAction("UsersControl", "Home");
         }
 
         public async Task<IActionResult> UnblockedUser(string id)
         {
-            await _adminRepository.UnblockedUser(id);
+            await _commandRepository.UnblockedUser(id);
             return RedirectToAction("UsersControl", "Home");
         }
 
         public async Task<IActionResult> AcceptUpdatePost(int id)
         {
-            await _adminRepository.AcceptUpdatePost(id);
+            await _commandRepository.AcceptUpdatePostAsync(id);
             return RedirectToAction("AllUpdatePost", "Home");
         }
 
         public async Task<IActionResult> CancelUpdatePost(int id)
         {
-            await _adminRepository.CancelUpdatePost(id);
+            await _commandRepository.CancelUpdatePostAsync(id);
             return RedirectToAction("AllUpdatePost", "Home");
         }
     }

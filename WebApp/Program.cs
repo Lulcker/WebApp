@@ -40,9 +40,11 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IAdminCommandRepository, AdminCommandRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IBotCommand, BotCommand>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
 var app = builder.Build();
 
@@ -55,12 +57,11 @@ app.UseAuthorization();
 
 app.UseHangfireDashboard("/dashboard");
 
-
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(
-        name: "admin_area",
-        areaName: "Admin",
+        name:  "admin_area",
+    areaName: "Admin",
      pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
         );
     endpoints.MapControllerRoute(
